@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 
 public class RecipesMainFragment extends Fragment {
 
+    public final static String TAG_RECIPES = "recipes";
      Context mContext;
     RecipeAdapter mRecipeAdapter;
     RecyclerView mRecycler;
@@ -74,23 +75,12 @@ public class RecipesMainFragment extends Fragment {
 
 Log.v("Entered in OnCreateView","OnCreateView");
         final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        //@BindView(R.id.recipe_RecyclerView);
-        //ButterKnife.bind(mRecipesRecyclerView);
-        //mRecipeAdapter = new RecipeAdapter();
-
         mRecycler =  (RecyclerView) (rootView.findViewById(R.id.recipe_RecyclerView));
-       // mRecycler.setHasFixedSize(true);
-        mRecipeAdapter = new RecipeAdapter(mContext);
+       mRecipeAdapter = new RecipeAdapter(mContext);
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecycler.setLayoutManager(mLayoutManager);
-       // mRecipeAdapter = new RecipeAdapter();
-        //mRecycler.setAdapter(mRecipeAdapter);
-        //TextView textView = new TextView(getActivity());
-        //textView.setText(R.string.hello_blank_fragment);
-        //FetchRecipeData fetchRecipeData = new FetchRecipeData();
-        //fetchRecipeData.execute();
-        return rootView;
+       return rootView;
     }
 
 

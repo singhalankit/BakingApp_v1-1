@@ -2,6 +2,7 @@ package com.example.ankit_pc.bakingappudacity;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,9 +46,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         this.activity_context = applicationContext;
     }
 
-   /* public RecipeAdapter(ArrayList<Recipe> recipes){
+    public RecipeAdapter(ArrayList<Recipe> recipes){
         setRecipes(recipes);
-    }*/
+    }
 
     @Override
     public RecipeAdapter.RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,11 +71,26 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.recipeText.setText(recipe.getName());
 
+        holder.recipeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), RecipeStepListActivity.class);
+                intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
+                intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES,recipes);
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        if(recipes != null)
+            return recipes.size();
+        else
+            return 0;
+
     }
 
     public void setRecipes(ArrayList<Recipe> recipes) {

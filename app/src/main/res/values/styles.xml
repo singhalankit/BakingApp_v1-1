@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" >
+
+    </style>
+
+    <style name="TextStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
 </resources>
