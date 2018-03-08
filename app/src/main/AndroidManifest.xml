@@ -54,6 +54,19 @@
                 android:value=".RecipeStepDetailActivity" />
         </activity>
 
+
+        <activity
+            android:name=".IngredientsList"
+            android:label="@string/title_ingredients"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".IngredientsList" />
+        </activity>
+
+
+
+
         <receiver android:name=".RecipeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

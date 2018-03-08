@@ -1,5 +1,6 @@
 package com.example.ankit_pc.bakingappudacity;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -19,6 +20,21 @@ public class RecipeWidget extends AppWidgetProvider {
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
         rv.setRemoteAdapter(R.id.recipe_widget_GridView, intent);
         rv.setEmptyView(R.id.recipe_widget_GridView, R.id.recipes_empty_TextView);
+
+
+        Intent ingredientsIntent = new Intent(context, IngredientsList.class);
+        Intent mainIntent = new Intent();
+        // Set the action for the intent.
+        // When the user touches a particular view, it will have the effect of
+        // broadcasting TOAST_ACTION.
+        //toastIntent.setAction(StackWidgetProvider.TOAST_ACTION);
+        ingredientsIntent.putExtra("recipe", mainIntent.getExtras());
+       // intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+        PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, ingredientsIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        rv.setPendingIntentTemplate(R.id.recipe_widget_GridView, toastPendingIntent);
+
+
 
         appWidgetManager.updateAppWidget(appWidgetId, rv);
     }

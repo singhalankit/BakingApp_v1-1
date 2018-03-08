@@ -68,12 +68,22 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list);
         Recipe recipe = mRecipes.get(i);
         rv.setTextViewText(R.id.recipe_TextView,recipe.getName());
-        Intent intent = new Intent(mContext, IngredientsList.class);
-        intent.putExtra("recipes", mRecipes);
-        intent.putExtra("position",i);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
-        rv.setOnClickPendingIntent(R.id.recipe_TextView, pendingIntent);
-        return rv;
+        //Intent intent = new Intent(mContext, IngredientsList.class);
+
+       // PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+        //rv.setOnClickPendingIntent(R.id.recipe_TextView, pendingIntent);
+        //return rv;
+
+
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtra("recipe", recipe);
+        //fillInIntent.putExtra("position",i);
+       // fillInIntent.putExtras(extras);
+        // Make it possible to distinguish the individual on-click
+        // action of a given item
+        rv.setOnClickFillInIntent(R.id.recipe_TextView, fillInIntent);
+        return  rv;
+
     }
 
     @Override
