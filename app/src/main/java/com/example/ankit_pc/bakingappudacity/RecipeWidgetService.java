@@ -69,7 +69,8 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         Recipe recipe = mRecipes.get(i);
         rv.setTextViewText(R.id.recipe_TextView,recipe.getName());
         Intent intent = new Intent(mContext, IngredientsList.class);
-        intent.putExtra("recipe", recipe);
+        intent.putExtra("recipes", mRecipes);
+        intent.putExtra("position",i);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
         rv.setOnClickPendingIntent(R.id.recipe_TextView, pendingIntent);
         return rv;

@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 
 /**
@@ -17,7 +19,8 @@ import butterknife.BindView;
 
 public class IngredientsList extends AppCompatActivity {
     Context mContext;
-    private Recipe recipe;
+    private ArrayList<Recipe> recipes;
+    int position;
 
     @BindView(R.id.widget_ingredients_RecyclerView)
     RecyclerView recyclerView;
@@ -28,8 +31,9 @@ public class IngredientsList extends AppCompatActivity {
         setContentView(R.layout.activity_ingredients_list);
 
         Intent intent = getIntent();
-        if (intent.hasExtra("recipe")) {
-            recipe = intent.getParcelableExtra("recipe");
+        if (intent.hasExtra("recipes")) {
+            recipes = intent.getParcelableExtra("recipes");
+            position = intent.getIntExtra("position",position);
             setupRecyclerView(recyclerView);
 
         }
@@ -38,11 +42,11 @@ public class IngredientsList extends AppCompatActivity {
 
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        Log.v("Entered in setRecycler",Integer.toString(recipe.getSteps().length));
+        Log.v("Entered in setRecycler",Integer.toString(recipes.get(position).getSteps().length));
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(new WidgetIngredientsAdapter(recipe));
+        recyclerView.setAdapter(new WidgetIngredientsAdapter(recipes.get(position)));
     }
 
 }
