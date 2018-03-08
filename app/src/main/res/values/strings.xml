@@ -16,5 +16,8 @@
     <string name="title_ingredients">Ingredients</string>
 
 
+    <string name="nutrient_name">Nutrient Name</string>
+    <string name="nutrient_unit">Nutrient Unit</string>
+    <string name="nutrient_quan">Nutrient Quantity</string>
 
 </resources>

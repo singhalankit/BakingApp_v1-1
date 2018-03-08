@@ -1,5 +1,6 @@
 package com.example.ankit_pc.bakingappudacity;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ANKIT_PC on 08-03-2018.
@@ -38,7 +40,13 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
     @Override
     public void onDataSetChanged() {
         FetchWidgetRecipeData recipeData = new FetchWidgetRecipeData();
-        recipeData.execute();
+        try {
+            recipeData.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -60,7 +68,10 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list);
         Recipe recipe = mRecipes.get(i);
         rv.setTextViewText(R.id.recipe_TextView,recipe.getName());
-
+        Intent intent = new Intent(mContext, IngredientsList.class);
+        intent.putExtra("recipe", recipe);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+        rv.setOnClickPendingIntent(R.id.recipe_TextView, pendingIntent);
         return rv;
     }
 
