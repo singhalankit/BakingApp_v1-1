@@ -39,6 +39,10 @@ dependencies {
 
 
 
+    //ExoPlayer
+    compile "com.google.android.exoplayer:exoplayer-core:r2.4.4"
+    compile "com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.4"
+    compile "com.google.android.exoplayer:exoplayer-ui:r2.4.4"
     //ButterKnife
     compile "com.jakewharton:butterknife:8.7.0"
     annotationProcessor "com.jakewharton:butterknife-compiler:8.7.0"
