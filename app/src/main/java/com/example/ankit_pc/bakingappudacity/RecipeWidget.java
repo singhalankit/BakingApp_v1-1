@@ -23,15 +23,16 @@ public class RecipeWidget extends AppWidgetProvider {
 
 
         Intent ingredientsIntent = new Intent(context, IngredientsList.class);
-        Intent mainIntent = new Intent();
+        //Intent mainIntent = new Intent();
         // Set the action for the intent.
         // When the user touches a particular view, it will have the effect of
         // broadcasting TOAST_ACTION.
         //toastIntent.setAction(StackWidgetProvider.TOAST_ACTION);
-        ingredientsIntent.putExtra("recipe", mainIntent.getExtras());
+        //ingredientsIntent.putExtra("recipe", mainIntent.getExtras());
        // intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, ingredientsIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, ingredientsIntent,
+          //      PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent toastPendingIntent = PendingIntent.getActivity(context,0,ingredientsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         rv.setPendingIntentTemplate(R.id.recipe_widget_GridView, toastPendingIntent);
 
 

@@ -12,6 +12,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by ANKIT_PC on 08-03-2018.
@@ -19,7 +20,7 @@ import butterknife.BindView;
 
 public class IngredientsList extends AppCompatActivity {
     Context mContext;
-    private ArrayList<Recipe> recipes;
+    private Recipe recipe = new Recipe();
     int position;
 
     @BindView(R.id.widget_ingredients_RecyclerView)
@@ -29,24 +30,40 @@ public class IngredientsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients_list);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        if (intent.hasExtra("recipes")) {
-            recipes = intent.getParcelableExtra("recipes");
-            position = intent.getIntExtra("position",position);
+        if (savedInstanceState != null) {
+            recipe = savedInstanceState.getParcelable("recipe");
             setupRecyclerView(recyclerView);
-
+        } else if (intent.hasExtra("recipe")) {
+            recipe = intent.getParcelableExtra("recipe");
+            setupRecyclerView(recyclerView);
         }
 
     }
 
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("recipe", recipe);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        recipe = savedInstanceState.getParcelable("recipe");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        Log.v("Entered in setRecycler",Integer.toString(recipes.get(position).getSteps().length));
+        Log.v("Entered in setRecycler",Integer.toString(recipe.getSteps().length));
         RecyclerView.LayoutManager mLayoutManager;
-        mLayoutManager = new LinearLayoutManager(mContext);
+        mLayoutManager = new LinearLayoutManager (mContext);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(new WidgetIngredientsAdapter(recipes.get(position)));
+        recyclerView.setAdapter(new WidgetIngredientsAdapter(recipe));
     }
 
 }
