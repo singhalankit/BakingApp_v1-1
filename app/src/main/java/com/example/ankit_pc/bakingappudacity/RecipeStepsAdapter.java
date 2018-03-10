@@ -1,5 +1,6 @@
 package com.example.ankit_pc.bakingappudacity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
+                Context context =  (Activity) v.getContext();
                 if (isTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putParcelable(RecipeStepDetailFragment.ARG_STEP, holder.step);

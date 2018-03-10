@@ -49,6 +49,10 @@ public class RecipeStepListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        if (findViewById(R.id.recipe_step_detail_container) != null) {
+            isTwoPane = true;
+        }
+
         Intent intent = getIntent();
         if (intent.hasExtra(RecipesMainFragment.TAG_RECIPES))
             recipes = intent.getParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES);
@@ -61,9 +65,7 @@ public class RecipeStepListActivity extends AppCompatActivity {
             setupRecyclerView(recyclerView);
         }
 
-        if (findViewById(R.id.recipe_step_detail_container) != null) {
-            isTwoPane = true;
-        }
+
     }
 
         @Override
