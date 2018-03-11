@@ -61,7 +61,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         holder.mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context =  (Activity) v.getContext();
+                Context context =   v.getContext();
                 if (isTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putParcelable(RecipeStepDetailFragment.ARG_STEP, holder.step);
