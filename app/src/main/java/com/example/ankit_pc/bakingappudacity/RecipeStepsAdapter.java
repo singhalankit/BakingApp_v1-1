@@ -27,6 +27,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
     private ArrayList<Recipe> recipes;
     private boolean isTwoPane;
 
+
     public RecipeStepsAdapter(Recipe recipe, ArrayList<Recipe> recipes, boolean isTwoPane) {
         this.recipe = recipe;
         this.recipes = recipes;
