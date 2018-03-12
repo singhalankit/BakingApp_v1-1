@@ -41,13 +41,13 @@ public class RecipeStepListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_step_list);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
+        /*setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        }*/
 
         if (findViewById(R.id.recipe_step_detail_container) != null) {
             isTwoPane = true;
