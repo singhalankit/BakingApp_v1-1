@@ -2,6 +2,7 @@ package com.example.ankit_pc.bakingappudacity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     Button prevButton;
     @BindView(R.id.nextButton) Button nextButton;
     @BindView(R.id.videoPlayerFullscreen)
-    ExoPlayer viewExoPlayer;
+    SimpleExoPlayerView viewExoPlayer;
     Long currentPosition;
 
 
@@ -79,6 +81,19 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         //intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES, recipes);
         //startActivity(intent);
         //viewExoPlayer.setPlayer
+
+
+
+
+        if(ExoPlayerVideoHandler.getInstance().getPlayer() != null) {
+            viewExoPlayer.setPlayer(ExoPlayerVideoHandler.getInstance().getPlayer());
+           // ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(mcurrent);
+        }
+        else
+            ExoPlayerVideoHandler.getInstance().prepareExoPlayerForUri(getApplicationContext(), Uri.parse(step.getVideoURL()), viewExoPlayer);
+        ExoPlayerVideoHandler.getInstance().goToForeground();
+        
+
 
     }
 
