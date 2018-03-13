@@ -3,7 +3,9 @@ package com.example.ankit_pc.bakingappudacity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -29,9 +31,18 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
     private Context mContext;
     ArrayList<Recipe> mRecipes = new ArrayList<Recipe>();
+    RecipeIngredient recipeIngredient;
+    Recipe mrecipe;
     RecipeRemoteViewsFactory(Context context){
         this.mContext = context;
     }
+    SharedPreferences sp  = mContext.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
+
+
+
+
+
+
     @Override
     public void onCreate() {
 
@@ -47,6 +58,14 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        for (int i=0;i<mRecipes.size();i++)
+        {
+
+            mrecipe = mRecipes.get(i);
+            if(mrecipe.getName() == getEditor())
+        }
+
 
     }
 

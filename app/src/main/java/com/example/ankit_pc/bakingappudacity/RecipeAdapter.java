@@ -3,6 +3,7 @@ package com.example.ankit_pc.bakingappudacity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by ANKIT_PC on 04-03-2018.
@@ -74,6 +77,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.recipeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = activity_context.getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("recipe_name",recipe.getName());
+                editor.commit();
+
                 Intent intent = new Intent(v.getContext(), RecipeStepListActivity.class);
                 intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
                 intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES,recipes);
