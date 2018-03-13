@@ -66,7 +66,7 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         {
 
             mrecipe = mRecipes.get(i);
-            if(mrecipe.getName() == sp.getString("recipe_name",""))
+            if(mrecipe.getName().equals(sp.getString("recipe_name","")))
             {
 
                 recipeIngredient = mrecipe.getIngredients()[i];
