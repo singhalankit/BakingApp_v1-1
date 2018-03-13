@@ -31,6 +31,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     private ArrayList<Recipe> recipes;
     private Context activity_context;
 
+    //SharedPreferences sharedPreferences =
+   // SharedPreferences sharedPreferences = activity_context.getSharedPreferences("MyPref", MODE_PRIVATE);
+    //SharedPreferences.Editor editor = sharedPreferences.edit();
+
     class RecipeViewHolder extends RecyclerView.ViewHolder{
        // @BindView(R.id.recipe_TextView)
         TextView recipeText;
@@ -47,6 +51,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public RecipeAdapter(Context applicationContext){
         this.activity_context = applicationContext;
+
+
     }
 
     public RecipeAdapter(ArrayList<Recipe> recipes){
@@ -77,10 +83,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.recipeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = activity_context.getSharedPreferences("MyPref", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("recipe_name",recipe.getName());
-                editor.commit();
+
+
 
                 Intent intent = new Intent(v.getContext(), RecipeStepListActivity.class);
                 intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);

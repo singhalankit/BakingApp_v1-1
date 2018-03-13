@@ -2,6 +2,7 @@ package com.example.ankit_pc.bakingappudacity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
@@ -38,6 +39,8 @@ public class RecipeStepListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         setContentView(R.layout.activity_recipe_step_list);
         ButterKnife.bind(this);
 
@@ -59,9 +62,13 @@ public class RecipeStepListActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             recipe = savedInstanceState.getParcelable(TAG_RECIPE);
+            editor.putString("recipe_name",recipe.getName());
+            editor.commit();
             setupRecyclerView(recyclerView);
         } else if (intent.hasExtra(TAG_RECIPE)) {
             recipe = intent.getParcelableExtra(TAG_RECIPE);
+            editor.putString("recipe_name",recipe.getName());
+            editor.commit();
             setupRecyclerView(recyclerView);
         }
 
@@ -82,6 +89,7 @@ public class RecipeStepListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         Log.v("Entered in setRecycler",Integer.toString(recipe.getSteps().length));
+
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLayoutManager);
