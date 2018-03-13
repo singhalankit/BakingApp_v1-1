@@ -18,11 +18,11 @@ public class RecipeWidget extends AppWidgetProvider {
         Intent intent = new Intent(context, RecipeWidgetService.class);
 
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        rv.setRemoteAdapter(R.id.recipe_widget_GridView, intent);
-        rv.setEmptyView(R.id.recipe_widget_GridView, R.id.recipes_empty_TextView);
+        rv.setRemoteAdapter(R.id.recipe_widget_ListView, intent);
+        rv.setEmptyView(R.id.recipe_widget_ListView, R.id.recipes_empty_TextView);
 
 
-        Intent ingredientsIntent = new Intent(context, IngredientsList.class);
+       // Intent ingredientsIntent = new Intent(context, IngredientsList.class);
         //Intent mainIntent = new Intent();
         // Set the action for the intent.
         // When the user touches a particular view, it will have the effect of
@@ -32,8 +32,8 @@ public class RecipeWidget extends AppWidgetProvider {
        // intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         //PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, ingredientsIntent,
           //      PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent toastPendingIntent = PendingIntent.getActivity(context,0,ingredientsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        rv.setPendingIntentTemplate(R.id.recipe_widget_GridView, toastPendingIntent);
+      //  PendingIntent toastPendingIntent = PendingIntent.getActivity(context,0,ingredientsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+       // rv.setPendingIntentTemplate(R.id.recipe_widget_GridView, toastPendingIntent);
 
 
 

@@ -63,7 +63,11 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         {
 
             mrecipe = mRecipes.get(i);
-            if(mrecipe.getName() == getEditor())
+            if(mrecipe.getName() == sp.getString("recipe_name",""))
+            {
+
+                recipeIngredient = mrecipe.getIngredients()[i];
+            }
         }
 
 
@@ -76,17 +80,20 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
     @Override
     public int getCount() {
-        if (mRecipes != null)
-            return mRecipes.size();
+        if (recipeIngredient != null)
+            return mrecipe.getIngredients().length;
         else
             return 0;
     }
 
     @Override
     public RemoteViews getViewAt(int i) {
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list);
-        Recipe recipe = mRecipes.get(i);
-        rv.setTextViewText(R.id.recipe_TextView,recipe.getName());
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_ingredients_adapter);
+        RecipeIngredient ri = mrecipe.getIngredients()[i];
+        //Recipe recipe = mRecipes.get(i);
+        rv.setTextViewText(R.id.widgetNutrient,ri.getIngredient());
+        rv.setTextViewText(R.id.widgetQuantity,ri.getQuantity());
+        rv.setTextViewText(R.id.widgetUnit,ri.getMeasure());
         //Intent intent = new Intent(mContext, IngredientsList.class);
 
        // PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
@@ -94,13 +101,13 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         //return rv;
 
 
-        Intent fillInIntent = new Intent();
-        fillInIntent.putExtra("recipe", recipe);
+      //  Intent fillInIntent = new Intent();
+       // fillInIntent.putExtra("recipe", recipe);
         //fillInIntent.putExtra("position",i);
        // fillInIntent.putExtras(extras);
         // Make it possible to distinguish the individual on-click
         // action of a given item
-        rv.setOnClickFillInIntent(R.id.recipe_TextView, fillInIntent);
+        //rv.setOnClickFillInIntent(R.id.recipe_TextView, fillInIntent);
         return  rv;
 
     }
