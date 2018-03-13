@@ -37,7 +37,6 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @BindView(R.id.previousButton)
     Button prevButton;
     @BindView(R.id.nextButton) Button nextButton;
-    @BindView(R.id.videoPlayerFullscreen)
     SimpleExoPlayerView viewExoPlayer;
     Long currentPosition;
 
@@ -50,6 +49,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
+        viewExoPlayer = (SimpleExoPlayerView) findViewById(R.id.videoPlayerFullscreen);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
