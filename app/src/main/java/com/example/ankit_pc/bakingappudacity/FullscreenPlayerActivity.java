@@ -48,14 +48,14 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
             if (intent.hasExtra(RecipeStepListActivity.TAG_RECIPE))
             {
                 recipe = intent.getParcelableExtra(RecipeStepListActivity.TAG_RECIPE);
-                mcurrent = intent.getLongExtra("current",00);
+               // mcurrent = intent.getLongExtra("current",00);
             }
             if (intent.hasExtra(RecipesMainFragment.TAG_RECIPES)) {
-                mcurrent = intent.getLongExtra("current",00);
+                //mcurrent = intent.getLongExtra("current",00);
                 recipes = intent.getParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES);
             }
             if (intent.hasExtra(RecipeStepDetailFragment.ARG_STEP)) {
-                mcurrent = intent.getLongExtra("current",00);
+                //mcurrent = intent.getLongExtra("current",00);
                 step = intent.getParcelableExtra(RecipeStepDetailFragment.ARG_STEP);
                 setTitle(step.getShortDescription());
             }

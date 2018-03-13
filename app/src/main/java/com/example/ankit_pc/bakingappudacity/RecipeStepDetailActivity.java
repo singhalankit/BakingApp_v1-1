@@ -71,7 +71,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullscreenPlayerActivity.class);
         intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
         intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
-        intent.putExtra("current",currentPosition);
+        //intent.putExtra("current",currentPosition);
         intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES, recipes);
         startActivity(intent);
     }
