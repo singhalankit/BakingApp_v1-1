@@ -33,6 +33,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @BindView(R.id.previousButton)
     Button prevButton;
     @BindView(R.id.nextButton) Button nextButton;
+    Long currentPosition;
 
 
     @Override
@@ -70,6 +71,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullscreenPlayerActivity.class);
         intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
         intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
+        intent.putExtra("current",currentPosition);
         intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES, recipes);
         startActivity(intent);
     }
@@ -131,9 +133,11 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        currentPosition = ExoPlayerVideoHandler.getInstance().getPlayer().getCurrentPosition();
         outState.putParcelable(RecipeStepListActivity.TAG_RECIPE, recipe);
         outState.putParcelableArrayList(RecipesMainFragment.TAG_RECIPES, recipes);
         outState.putParcelable(RecipeStepDetailFragment.ARG_STEP, step);
+        outState.putLong("current",currentPosition);
     }
 
     @Override
@@ -142,6 +146,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         step = savedInstanceState.getParcelable(RecipeStepDetailFragment.ARG_STEP);
         recipes = savedInstanceState.getParcelableArrayList(RecipesMainFragment.TAG_RECIPES);
         recipe = savedInstanceState.getParcelable(RecipeStepListActivity.TAG_RECIPE);
+        currentPosition = savedInstanceState.getLong("current");
     }
 
     @Override

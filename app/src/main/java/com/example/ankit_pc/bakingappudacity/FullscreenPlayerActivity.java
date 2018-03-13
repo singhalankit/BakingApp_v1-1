@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,8 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
     private ArrayList<Recipe> recipes;
     private boolean destroyVideo = false;
     @BindView(R.id.videoPlayerFullscreen)  SimpleExoPlayerView exoPlayerView;
+    Long mcurrent;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,13 +41,21 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
             step = savedInstanceState.getParcelable(RecipeStepDetailFragment.ARG_STEP);
             recipes = savedInstanceState.getParcelableArrayList(RecipesMainFragment.TAG_RECIPES);
             recipe = savedInstanceState.getParcelable(RecipeStepListActivity.TAG_RECIPE);
+            mcurrent = savedInstanceState.getLong("current");
+
         } else {
             Intent intent = getIntent();
             if (intent.hasExtra(RecipeStepListActivity.TAG_RECIPE))
+            {
                 recipe = intent.getParcelableExtra(RecipeStepListActivity.TAG_RECIPE);
-            if (intent.hasExtra(RecipesMainFragment.TAG_RECIPES))
+                mcurrent = intent.getLongExtra("current",00);
+            }
+            if (intent.hasExtra(RecipesMainFragment.TAG_RECIPES)) {
+                mcurrent = intent.getLongExtra("current",00);
                 recipes = intent.getParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES);
+            }
             if (intent.hasExtra(RecipeStepDetailFragment.ARG_STEP)) {
+                mcurrent = intent.getLongExtra("current",00);
                 step = intent.getParcelableExtra(RecipeStepDetailFragment.ARG_STEP);
                 setTitle(step.getShortDescription());
             }
@@ -81,8 +92,10 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(ExoPlayerVideoHandler.getInstance().getPlayer() != null)
+        if(ExoPlayerVideoHandler.getInstance().getPlayer() != null) {
             exoPlayerView.setPlayer(ExoPlayerVideoHandler.getInstance().getPlayer());
+            ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(mcurrent);
+        }
         else
             ExoPlayerVideoHandler.getInstance().prepareExoPlayerForUri(getApplicationContext(), Uri.parse(step.getVideoURL()), exoPlayerView);
         ExoPlayerVideoHandler.getInstance().goToForeground();
@@ -92,6 +105,12 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
     public void onBackPressed(){
         destroyVideo = true;
         super.onBackPressed();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        mcurrent = ExoPlayerVideoHandler.getInstance().getPlayer().getCurrentPosition();
     }
 
     @Override

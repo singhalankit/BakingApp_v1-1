@@ -1,6 +1,7 @@
 package com.example.ankit_pc.bakingappudacity;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -32,9 +33,18 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     ImageView stepThumbnail;
     @BindView(R.id.step_video)
     SimpleExoPlayerView stepVideoPlayer;
+    Long currentPosition;
 
 
     public RecipeStepDetailFragment() {
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        currentPosition = ExoPlayerVideoHandler.getInstance().getPlayer().getCurrentPosition();
     }
 
     @Override
