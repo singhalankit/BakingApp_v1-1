@@ -92,7 +92,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         else
             ExoPlayerVideoHandler.getInstance().prepareExoPlayerForUri(getApplicationContext(), Uri.parse(step.getVideoURL()), viewExoPlayer);
         ExoPlayerVideoHandler.getInstance().goToForeground();
-        
+
 
 
     }
