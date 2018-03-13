@@ -26,7 +26,7 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
     private Recipe recipe;
     private ArrayList<Recipe> recipes;
     private boolean destroyVideo = false;
-    @BindView(R.id.videoPlayerFullscreen)  SimpleExoPlayerView exoPlayerView;
+    @BindView(R.id.videoPlayerFullscreen_1)  SimpleExoPlayerView exoPlayerView;
     Long mcurrent;
 
 

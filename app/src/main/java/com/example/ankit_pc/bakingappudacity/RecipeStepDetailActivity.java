@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.exoplayer2.ExoPlayer;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -33,6 +35,8 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @BindView(R.id.previousButton)
     Button prevButton;
     @BindView(R.id.nextButton) Button nextButton;
+    @BindView(R.id.videoPlayerFullscreen)
+    ExoPlayer viewExoPlayer;
     Long currentPosition;
 
 
@@ -68,12 +72,14 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     }
 
     private void startFullscreen(){
-        Intent intent = new Intent(this, FullscreenPlayerActivity.class);
-        intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
-        intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
+      //  Intent intent = new Intent(this, FullscreenPlayerActivity.class);
+       // intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
+        //intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
         //intent.putExtra("current",currentPosition);
-        intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES, recipes);
-        startActivity(intent);
+        //intent.putParcelableArrayListExtra(RecipesMainFragment.TAG_RECIPES, recipes);
+        //startActivity(intent);
+        //viewExoPlayer.setPlayer
+
     }
 
     private void changeFragment(){

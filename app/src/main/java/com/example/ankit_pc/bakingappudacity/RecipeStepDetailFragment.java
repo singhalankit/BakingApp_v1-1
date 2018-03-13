@@ -51,6 +51,8 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+        currentPosition = savedInstanceState.getLong("current");}
 
         if (getArguments().containsKey(ARG_STEP)) {
             step = getArguments().getParcelable(ARG_STEP);
@@ -66,7 +68,8 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
         View rootView = inflater.inflate(R.layout.recipe_step_detail_fragment, container, false);
         ButterKnife.bind(this,rootView);
         ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
-        currentPosition = savedInstanceState.getLong("current");
+        if (savedInstanceState != null){
+        currentPosition = savedInstanceState.getLong("current");}
         fillUI(rootView);
         return rootView;
     }
@@ -111,6 +114,7 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(currentPosition);
     }
 }
