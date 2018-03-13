@@ -36,7 +36,7 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
     RecipeRemoteViewsFactory(Context context){
         this.mContext = context;
     }
-    SharedPreferences sp  = mContext.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
+
 
 
 
@@ -50,6 +50,9 @@ class RecipeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
     @Override
     public void onDataSetChanged() {
+
+        SharedPreferences sp = mContext.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
+
         FetchWidgetRecipeData recipeData = new FetchWidgetRecipeData();
         try {
             recipeData.execute().get();
