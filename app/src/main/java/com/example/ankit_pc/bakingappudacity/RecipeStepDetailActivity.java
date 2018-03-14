@@ -41,7 +41,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @BindView(R.id.previousButton)  Button prevButton;
     @Nullable
     @BindView(R.id.nextButton)  Button nextButton;
-    SimpleExoPlayerView viewExoPlayer;
+   // SimpleExoPlayerView viewExoPlayer;
     long currentPosition;
 
 
@@ -53,7 +53,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-        viewExoPlayer = (SimpleExoPlayerView) findViewById(R.id.videoPlayerFullscreen);
+       // viewExoPlayer = (SimpleExoPlayerView) findViewById(R.id.videoPlayerFullscreen);
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getLong("current");
         }
@@ -80,18 +80,22 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         }
 
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()){
-            startFullscreen(currentPosition);
-        } else {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()) {
+
+            prevButton.setVisibility(View.GONE);
+            nextButton.setVisibility(View.GONE);
+        }
+            //     startFullscreen(currentPosition);
+        //} else {
             checkPrevNext();
             changeFragment();
-        }
+        //}
 
 
 
     }
 
-    private void startFullscreen(long position){
+   /* private void startFullscreen(long position){
       //  Intent intent = new Intent(this, FullscreenPlayerActivity.class);
        // intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
         //intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
@@ -114,7 +118,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
     private void changeFragment(){
         Bundle arguments = new Bundle();
