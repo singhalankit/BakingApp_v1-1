@@ -17,9 +17,12 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
 import java.util.ArrayList;
 
+import javax.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 /**
  * Created by ANKIT_PC on 07-03-2018.
@@ -34,9 +37,10 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     private ArrayList<Recipe> recipes;
     private RecipeStepDetailFragment fragment;
 
-    @BindView(R.id.previousButton)
-    Button prevButton;
-    @BindView(R.id.nextButton) Button nextButton;
+    @Nullable
+    @BindView(R.id.previousButton)  Button prevButton;
+    @Nullable
+    @BindView(R.id.nextButton)  Button nextButton;
     SimpleExoPlayerView viewExoPlayer;
     Long currentPosition;
 
@@ -50,6 +54,9 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         viewExoPlayer = (SimpleExoPlayerView) findViewById(R.id.videoPlayerFullscreen);
+
+        //prevButton = (Button) findViewById(R.id.previousButton);
+        //nextButton = (Button) findViewById(R.id.nextButton);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -70,7 +77,16 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
             recipe = savedInstanceState.getParcelable(RecipeStepListActivity.TAG_RECIPE);
         }
 
-        checkPrevNext();
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()){
+            startFullscreen();
+        } else {
+            checkPrevNext();
+            changeFragment();
+        }
+
+
+
     }
 
     private void startFullscreen(){
@@ -107,6 +123,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
                 .commit();
     }
 
+@Optional
     private void checkPrevNext(){
         if(recipe != null) {
             RecipeStep[] steps = recipe.getSteps();
@@ -130,20 +147,20 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
                 }
             }
         }
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()){
+        /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()){
             startFullscreen();
         } else {
             changeFragment();
-        }
+        }*/
     }
-
+    @Optional
     @OnClick(R.id.previousButton)
     void previousStep(View view){
         step = prevStep;
         ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
         checkPrevNext();
     }
-
+    @Optional
     @OnClick(R.id.nextButton)
     void nextStep(View view){
         step = nextStep;

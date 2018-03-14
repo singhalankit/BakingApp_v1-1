@@ -111,10 +111,10 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
         ExoPlayerVideoHandler.getInstance().goToBackground();
     }
 
-    @Override
+  /*  @Override
     public void onResume() {
         super.onResume();
 
         ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(currentPosition);
-    }
+    }*/
 }

@@ -41,7 +41,7 @@ public class FullscreenPlayerActivity extends AppCompatActivity {
             step = savedInstanceState.getParcelable(RecipeStepDetailFragment.ARG_STEP);
             recipes = savedInstanceState.getParcelableArrayList(RecipesMainFragment.TAG_RECIPES);
             recipe = savedInstanceState.getParcelable(RecipeStepListActivity.TAG_RECIPE);
-            mcurrent = savedInstanceState.getLong("current");
+        //    mcurrent = savedInstanceState.getLong("current");
 
         } else {
             Intent intent = getIntent();
