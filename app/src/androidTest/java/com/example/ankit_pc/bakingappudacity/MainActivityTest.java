@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -38,11 +37,11 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
         ViewInteraction appCompatTextView = onView(
-                allOf(withId(R.id.recipe_TextView), withText("Yellow Cake"),
+                allOf(withId(R.id.recipe_TextView), withText("Nutella Pie"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.recipe_RecyclerView),
-                                        2),
+                                        0),
                                 1),
                         isDisplayed()));
         appCompatTextView.perform(click());
@@ -52,16 +51,17 @@ public class MainActivityTest {
                         childAtPosition(
                                 withId(R.id.frameLayout),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(3, click()));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.exo_play), withContentDescription("Play"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.nextButton), withText("Next Step"),
@@ -73,16 +73,17 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.nextButton), withText("Next Step"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        1),
+                                1),
+                        isDisplayed()));
+        appCompatButton2.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
+        ViewInteraction appCompatImageButton2 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
                                 allOf(withId(R.id.detail_toolbar),
@@ -91,9 +92,21 @@ public class MainActivityTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
+        appCompatImageButton2.perform(click());
 
-        pressBack();
+        ViewInteraction recyclerView2 = onView(
+                allOf(withId(R.id.include_recipe_step_list),
+                        childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")),
+                                0)));
+        recyclerView2.perform(actionOnItemAtPosition(1, click()));
+
+        ViewInteraction recyclerView3 = onView(
+                allOf(withId(R.id.include_recipe_step_list),
+                        childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")),
+                                0)));
+        recyclerView3.perform(actionOnItemAtPosition(0, click()));
 
     }
 

@@ -3,7 +3,9 @@ package com.example.ankit_pc.bakingappudacity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -14,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
@@ -73,9 +77,15 @@ public class RecipeStepListActivity extends AppCompatActivity {
         }
 
 
+
+
+
+
     }
 
-        @Override
+
+
+    @Override
         protected void onSaveInstanceState(Bundle outState) {
             outState.putParcelable(TAG_RECIPE, recipe);
             super.onSaveInstanceState(outState);

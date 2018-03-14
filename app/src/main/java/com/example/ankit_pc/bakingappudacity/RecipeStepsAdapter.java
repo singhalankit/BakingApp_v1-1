@@ -66,6 +66,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
                 if (isTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putParcelable(RecipeStepDetailFragment.ARG_STEP, holder.step);
+                    arguments.putBoolean("pane",isTwoPane);
                     RecipeStepDetailFragment fragment = new RecipeStepDetailFragment();
                     fragment.setArguments(arguments);
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()

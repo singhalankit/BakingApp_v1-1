@@ -37,7 +37,7 @@ master/detail flow.
         android:layout_height="match_parent"
         android:layout_weight="3" >
 
-    <include layout="@layout/recipe_step_detail_fragment" />
+        <include layout="@layout/recipe_step_detail_fragment" />
 
 
 

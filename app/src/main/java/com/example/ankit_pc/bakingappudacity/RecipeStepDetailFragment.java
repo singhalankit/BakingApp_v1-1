@@ -2,6 +2,7 @@ package com.example.ankit_pc.bakingappudacity;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -34,6 +35,7 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     @BindView(R.id.step_video)
     SimpleExoPlayerView stepVideoPlayer;
     Long currentPosition;
+    boolean mTwoPane;
 
 
     public RecipeStepDetailFragment() {
@@ -56,6 +58,7 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
 
         if (getArguments().containsKey(ARG_STEP)) {
             step = getArguments().getParcelable(ARG_STEP);
+            mTwoPane = getArguments().getBoolean("pane");
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(step.getShortDescription());
@@ -67,7 +70,12 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_step_detail_fragment, container, false);
         ButterKnife.bind(this,rootView);
-        //ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
+
+        if (mTwoPane ) {
+            ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
+        }
+
+
         if (savedInstanceState != null){
         currentPosition = savedInstanceState.getLong("current");}
         fillUI(rootView);
