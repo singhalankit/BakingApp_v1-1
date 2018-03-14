@@ -67,7 +67,7 @@ public class RecipeStepDetailFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_step_detail_fragment, container, false);
         ButterKnife.bind(this,rootView);
-        ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
+        //ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
         if (savedInstanceState != null){
         currentPosition = savedInstanceState.getLong("current");}
         fillUI(rootView);

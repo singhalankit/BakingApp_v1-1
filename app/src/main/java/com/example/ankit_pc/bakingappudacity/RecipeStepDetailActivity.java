@@ -42,7 +42,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     @Nullable
     @BindView(R.id.nextButton)  Button nextButton;
     SimpleExoPlayerView viewExoPlayer;
-    Long currentPosition;
+    long currentPosition;
 
 
     @Override
@@ -54,7 +54,9 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         viewExoPlayer = (SimpleExoPlayerView) findViewById(R.id.videoPlayerFullscreen);
-
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getLong("current");
+        }
         //prevButton = (Button) findViewById(R.id.previousButton);
         //nextButton = (Button) findViewById(R.id.nextButton);
 
@@ -79,7 +81,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !step.getVideoURL().isEmpty()){
-            startFullscreen();
+            startFullscreen(currentPosition);
         } else {
             checkPrevNext();
             changeFragment();
@@ -89,7 +91,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
     }
 
-    private void startFullscreen(){
+    private void startFullscreen(long position){
       //  Intent intent = new Intent(this, FullscreenPlayerActivity.class);
        // intent.putExtra(RecipeStepListActivity.TAG_RECIPE, recipe);
         //intent.putExtra(RecipeStepDetailFragment.ARG_STEP, step);
@@ -98,12 +100,13 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         //startActivity(intent);
         //viewExoPlayer.setPlayer
 
-
+        position = currentPosition;
 
 
         if(ExoPlayerVideoHandler.getInstance().getPlayer() != null) {
+            viewExoPlayer.setVisibility(View.VISIBLE);
             viewExoPlayer.setPlayer(ExoPlayerVideoHandler.getInstance().getPlayer());
-           // ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(mcurrent);
+            ExoPlayerVideoHandler.getInstance().getPlayer().seekTo(position);
         }
         else
             ExoPlayerVideoHandler.getInstance().prepareExoPlayerForUri(getApplicationContext(), Uri.parse(step.getVideoURL()), viewExoPlayer);
@@ -159,6 +162,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         step = prevStep;
         ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
         checkPrevNext();
+        changeFragment();
     }
     @Optional
     @OnClick(R.id.nextButton)
@@ -166,6 +170,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         step = nextStep;
         ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
         checkPrevNext();
+        changeFragment();
     }
 
     @Override
